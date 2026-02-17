@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-02-17" agent="Claude" type="device">
+  <diagram name="High-Level Architecture" id="arch-overview">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;AOSP Emulator vs Cuttlefish - High-Level Architecture&lt;/b&gt;&lt;br&gt;&lt;i&gt;Automotive SDV Perspective | Source: AOSP Main Branch&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="800" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ EMULATOR SIDE (LEFT) ============ -->
+        <mxCell id="emu_container" value="AOSP Emulator (Goldfish/Ranchu)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;verticalAlign=top;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="70" width="730" height="800" as="geometry"/>
+        </mxCell>
+
+        <!-- Emulator Apps Layer -->
+        <mxCell id="emu_apps" value="&lt;b&gt;Android Apps &amp; Framework&lt;/b&gt;&lt;br&gt;SurfaceFlinger | AudioFlinger | SensorService | CarService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="50" y="100" width="690" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Emulator HAL Layer -->
+        <mxCell id="emu_hal_container" value="Guest HALs (device/generic/goldfish/hals/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=11;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="50" y="170" width="690" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_audio" value="&lt;b&gt;Audio HAL&lt;/b&gt;&lt;br&gt;HIDL 7.0&lt;br&gt;IPrimaryDevice&lt;br&gt;primary_device.h&lt;br&gt;&lt;i&gt;TinyALSA backend&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="105" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_sensors" value="&lt;b&gt;Sensors HAL&lt;/b&gt;&lt;br&gt;HIDL 2.1&lt;br&gt;MultihalSensors&lt;br&gt;ISensorsSubHal&lt;br&gt;&lt;i&gt;QEMU pipe transport&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="175" y="200" width="105" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_camera" value="&lt;b&gt;Camera HAL&lt;/b&gt;&lt;br&gt;HIDL 2.7&lt;br&gt;EmulatedCamera&lt;br&gt;QemuClient&lt;br&gt;&lt;i&gt;Host webcam/scene&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="290" y="200" width="105" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_gps" value="&lt;b&gt;GPS HAL&lt;/b&gt;&lt;br&gt;Legacy&lt;br&gt;gps_qemu.c&lt;br&gt;NMEA parser&lt;br&gt;&lt;i&gt;Serial channel&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="405" y="200" width="105" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_radio" value="&lt;b&gt;Radio HAL&lt;/b&gt;&lt;br&gt;HIDL 1.0&lt;br&gt;hals/radio/&lt;br&gt;&lt;i&gt;Basic stub&lt;/i&gt;&lt;br&gt;&lt;font color=&quot;#E53935&quot;&gt;No BroadcastRadio&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="520" y="200" width="105" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_noauto" value="&lt;font color=&quot;#C62828&quot;&gt;&lt;b&gt;No Vehicle HAL&lt;/b&gt;&lt;br&gt;No CAN bus&lt;br&gt;No EVS&lt;br&gt;No AudioControl&lt;br&gt;No multi-zone audio&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="635" y="200" width="95" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- Emulator Transport -->
+        <mxCell id="emu_transport" value="&lt;b&gt;Transport: goldfish_pipe&lt;/b&gt; (hw/misc/goldfish_pipe.c)&lt;br&gt;Custom MMIO device | Multiplexed channels: pipe:opengles, pipe:qemud:sensors, pipe:qemud:camera" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1565C0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="350" width="690" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Emulator VMM -->
+        <mxCell id="emu_qemu" value="&lt;b&gt;Custom QEMU Fork&lt;/b&gt; (external/qemu/) | C/C++ | Monolithic process&lt;br&gt;Goldfish Devices: goldfish_audio, goldfish_battery, goldfish_events, goldfish_sync, goldfish_address_space" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#42A5F5;strokeColor=#1565C0;fontColor=#FFFFFF;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="410" width="690" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Emulator GPU -->
+        <mxCell id="emu_gpu" value="&lt;b&gt;GPU: gfxstream via goldfish_pipe&lt;/b&gt;&lt;br&gt;libOpenglRender | GLES encoder (goldfish-opengl/system/) | Vulkan encoder | Host GPU rendering" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E88E5;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="475" width="340" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Emulator Network -->
+        <mxCell id="emu_net" value="&lt;b&gt;Network: SLIRP NAT&lt;/b&gt;&lt;br&gt;User-mode | 10.0.2.x | No WiFi stack" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E88E5;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="475" width="340" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Emulator Display -->
+        <mxCell id="emu_display" value="&lt;b&gt;Qt Desktop GUI&lt;/b&gt; | Android Studio embedded | gRPC API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565C0;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="540" width="340" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_accel" value="&lt;b&gt;KVM / HVF / AEHD&lt;/b&gt; | Cross-arch: ARM on x86 (TCG)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0D47A1;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="540" width="340" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Emulator assessment box -->
+        <mxCell id="emu_assess" value="&lt;b&gt;Automotive SDV Assessment:&lt;/b&gt;&lt;br&gt;&#10;❌ No Vehicle HAL (IVehicle)&lt;br&gt;&#10;❌ No CAN bus / automotive CAN HAL&lt;br&gt;&#10;❌ No multi-zone audio (no BUS routing)&lt;br&gt;&#10;❌ No BroadcastRadio / FM Tuner HAL&lt;br&gt;&#10;❌ No EVS (Exterior View System)&lt;br&gt;&#10;❌ No real WiFi stack for V2X testing&lt;br&gt;&#10;⚠️ HIDL HALs (legacy, migrating to AIDL)&lt;br&gt;&#10;✅ Good for app-level automotive UI testing&lt;br&gt;&#10;✅ Cross-arch ARM emulation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="600" width="690" height="150" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ CUTTLEFISH SIDE (RIGHT) ============ -->
+        <mxCell id="cf_container" value="Cuttlefish Virtual Device" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="830" y="70" width="730" height="800" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Apps Layer -->
+        <mxCell id="cf_apps" value="&lt;b&gt;Android Apps &amp; Framework&lt;/b&gt;&lt;br&gt;SurfaceFlinger | AudioFlinger | SensorService | CarService | AAOS Framework" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="100" width="690" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- CF HAL Layer -->
+        <mxCell id="cf_hal_container" value="Guest HALs (device/google/cuttlefish/guest/hals/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=11;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="850" y="170" width="690" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_audio" value="&lt;b&gt;Audio HAL&lt;/b&gt;&lt;br&gt;HIDL 7.0&lt;br&gt;effects/manifest.xml&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;Multi-zone bus routing&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;i&gt;BUS00-05 (Media/Nav/&lt;br&gt;Notif/Phone/Assist/Sys)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="860" y="200" width="115" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_vehicle" value="&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;Vehicle HAL&lt;/b&gt;&lt;br&gt;&lt;b&gt;AIDL v3&lt;/b&gt;&lt;br&gt;IVehicle/default&lt;br&gt;GRPCVehicleHardware&lt;br&gt;DefaultVehicleHal&lt;br&gt;&lt;i&gt;vsock + gRPC to host&lt;/i&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#1B5E20;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="985" y="200" width="115" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_bluetooth" value="&lt;b&gt;Bluetooth&lt;/b&gt;&lt;br&gt;RootCanal&lt;br&gt;BluetoothHandler&lt;br&gt;HCI over FIFO&lt;br&gt;&lt;i&gt;bt_fifo_vm.in/out&lt;/i&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;Full BT stack&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="200" width="105" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_camera" value="&lt;b&gt;Camera HAL&lt;/b&gt;&lt;br&gt;HIDL 2.7&lt;br&gt;VsockCameraProvider&lt;br&gt;VsockCameraDevice&lt;br&gt;&lt;i&gt;Frame inject via vsock&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="200" width="105" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_auto" value="&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;Auto-Specific&lt;/b&gt;&lt;br&gt;broadcastradio.xml&lt;br&gt;fm_tuner input&lt;br&gt;telephony_rx/tx&lt;br&gt;HFP audio routing&lt;br&gt;&lt;b&gt;AudioControl HAL&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#1B5E20;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="200" width="105" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Transport -->
+        <mxCell id="cf_transport" value="&lt;b&gt;Transport: VirtIO + vsock (AF_VSOCK)&lt;/b&gt;&lt;br&gt;virtio-gpu | virtio-net | virtio-blk | virtio-snd | virtio-input | virtio-vsock (CID:port addressing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#66BB6A;strokeColor=#2E7D32;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="850" y="350" width="690" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- CF VMM -->
+        <mxCell id="cf_crosvm" value="&lt;b&gt;crosvm&lt;/b&gt; (external/crosvm/) | Rust (memory-safe) | Per-device sandboxing (seccomp-bpf)&lt;br&gt;VirtIO Devices: gpu, net, blk, snd, input, vsock, console, fs | Alternative: QEMU via --vm_manager=qemu" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#43A047;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="410" width="690" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- CF GPU -->
+        <mxCell id="cf_gpu" value="&lt;b&gt;GPU: gfxstream / virgl / venus via virtio-gpu&lt;/b&gt;&lt;br&gt;4 modes: gfxstream (best), drm_virgl, venus (Vulkan), guest_swiftshader (no GPU)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="850" y="475" width="340" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Network -->
+        <mxCell id="cf_net" value="&lt;b&gt;Network: Bridge+TAP+WiFi&lt;/b&gt;&lt;br&gt;mac80211_hwsim | OpenWrt AP | Full WPA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="475" width="340" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Display -->
+        <mxCell id="cf_display" value="&lt;b&gt;WebRTC Streaming&lt;/b&gt; | Browser client | Multi-display support" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B5E20;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="850" y="540" width="340" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_accel" value="&lt;b&gt;KVM only (Linux)&lt;/b&gt; | Native arch | Enforcing SELinux | AVB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B5E20;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="540" width="340" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- CF assessment box -->
+        <mxCell id="cf_assess" value="&lt;b&gt;Automotive SDV Assessment:&lt;/b&gt;&lt;br&gt;&#10;✅ Vehicle HAL AIDL v3 (GRPCVehicleHardware → host VHAL server via vsock)&lt;br&gt;&#10;✅ Multi-zone audio: 6 BUS outputs (Media/Nav/Notif/Phone/Assist/System) + FM tuner input + HFP&lt;br&gt;&#10;✅ BroadcastRadio permission declared (android.hardware.broadcastradio.xml)&lt;br&gt;&#10;✅ Full Bluetooth stack via RootCanal (HCI over FIFO pipes)&lt;br&gt;&#10;✅ Real WiFi stack (mac80211_hwsim + OpenWrt) for connectivity testing&lt;br&gt;&#10;✅ AAOS build target: aosp_cf_x86_64_auto | Inherits car_vendor.mk&lt;br&gt;&#10;⚠️ No native CAN bus in crosvm (ICanController AIDL exists but needs vCAN integration)&lt;br&gt;&#10;⚠️ EVS/Surround View HAL defined in hw_interfaces but no CF implementation yet&lt;br&gt;&#10;⚠️ TV Tuner (DVB/ATSC) HAL defined but no CF implementation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F8E9;strokeColor=#33691E;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="850" y="600" width="690" height="170" as="geometry"/>
+        </mxCell>
+
+        <!-- VS divider -->
+        <mxCell id="vs_circle" value="VS" style="ellipse;whiteSpace=wrap;html=1;fillColor=#424242;strokeColor=#212121;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="765" y="400" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="&lt;b&gt;Source: Real AOSP code analysis&lt;/b&gt; | Repos cloned: device/google/cuttlefish, device/generic/goldfish, external/crosvm, hardware/interfaces" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="400" y="880" width="800" height="20" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

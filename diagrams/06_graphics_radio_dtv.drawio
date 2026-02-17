@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="22.1.2">
+  <diagram id="graphics-radio" name="Graphics Pipeline, Broadcast Radio &amp; Digital TV">
+    <mxGraphModel dx="1800" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;Graphics, Broadcast Radio &amp; Digital TV Comparison&lt;/b&gt;&lt;br&gt;GPU Pipeline · Display · IBroadcastRadio · ITuner — Automotive Tier-1 Analysis" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="200" y="15" width="1200" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== GRAPHICS SECTION ==================== -->
+        <mxCell id="gfx_section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#880E4F;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="75" width="1540" height="350" as="geometry"/>
+        </mxCell>
+        <mxCell id="gfx_title" value="&lt;b&gt;🖥️ GRAPHICS / GPU PIPELINE&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#880E4F;" vertex="1" parent="1">
+          <mxGeometry x="600" y="78" width="360" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Graphics -->
+        <mxCell id="cf_gfx_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#880E4F;" vertex="1" parent="1">
+          <mxGeometry x="35" y="108" width="735" height="305" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_gfx_title" value="&lt;b&gt;Cuttlefish: gfxstream + VirtIO GPU&lt;/b&gt;" style="text;html=1;align=center;fontSize=12;fontColor=#880E4F;" vertex="1" parent="1">
+          <mxGeometry x="200" y="112" width="400" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- Guest side -->
+        <mxCell id="cf_gfx_guest_app" value="&lt;b&gt;Android App&lt;/b&gt;&lt;br&gt;OpenGL ES 3.x / Vulkan 1.x" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F48FB1;strokeColor=#880E4F;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="230" y="138" width="300" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gfx_gralloc" value="&lt;b&gt;Gralloc HAL (minigbm/crosvm)&lt;/b&gt;&lt;br&gt;guest/hals/gralloc/ — VirtIO GPU backed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F48FB1;strokeColor=#880E4F;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="200" y="180" width="360" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gfx_vulkan" value="&lt;b&gt;Vulkan HAL&lt;/b&gt;&lt;br&gt;guest/hals/vulkan/&lt;br&gt;gfxstream Vulkan encoder" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F48FB1;strokeColor=#880E4F;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="50" y="222" width="200" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gfx_gles" value="&lt;b&gt;GLES Encoder&lt;/b&gt;&lt;br&gt;gfxstream GL commands&lt;br&gt;Serialized over VirtIO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F48FB1;strokeColor=#880E4F;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="222" width="200" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gfx_composer" value="&lt;b&gt;HWComposer HAL&lt;/b&gt;&lt;br&gt;DRM/KMS via VirtIO GPU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F48FB1;strokeColor=#880E4F;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="510" y="222" width="200" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- VM boundary -->
+        <mxCell id="cf_gfx_vm" value="&lt;font color=&quot;#D32F2F&quot;&gt;── VirtIO GPU transport (crosvm) ──&lt;/font&gt;" style="text;html=1;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="270" width="450" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- Host side -->
+        <mxCell id="cf_gfx_host" value="&lt;b&gt;Host: gfxstream Renderer&lt;/b&gt;&lt;br&gt;hardware/google/gfxstream/&lt;br&gt;Decodes GL/Vulkan → Host GPU (real HW accel)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EC407A;strokeColor=#880E4F;fontColor=#FFFFFF;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="120" y="292" width="350" height="45" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gfx_display" value="&lt;b&gt;Display Output&lt;/b&gt;&lt;br&gt;WebRTC stream to browser&lt;br&gt;Multi-display support (cluster + IVI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#AD1457;strokeColor=#880E4F;fontColor=#FFFFFF;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="490" y="292" width="250" height="45" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gfx_auto" value="&lt;b&gt;Automotive Graphics:&lt;/b&gt;&lt;br&gt;✅ Multi-display (instrument cluster + IVI)&lt;br&gt;✅ Vulkan 1.x for modern UI frameworks&lt;br&gt;✅ WebRTC for remote dev/demo&lt;br&gt;✅ HWComposer for system UI layers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#880E4F;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="50" y="345" width="350" height="58" as="geometry"/>
+        </mxCell>
+
+        <!-- Emu Graphics -->
+        <mxCell id="emu_gfx_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="790" y="108" width="755" height="305" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_gfx_title" value="&lt;b&gt;Emulator: gfxstream + goldfish_pipe&lt;/b&gt;" style="text;html=1;align=center;fontSize=12;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="970" y="112" width="400" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gfx_app" value="&lt;b&gt;Android App&lt;/b&gt;&lt;br&gt;OpenGL ES 3.x / Vulkan 1.x" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="990" y="138" width="300" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gfx_gralloc" value="&lt;b&gt;Gralloc HAL (goldfish)&lt;/b&gt;&lt;br&gt;goldfish/hals/gralloc/ — QEMU pipe backed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="960" y="180" width="360" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gfx_encoder" value="&lt;b&gt;gfxstream Encoder&lt;/b&gt;&lt;br&gt;Same encoder as Cuttlefish!&lt;br&gt;GL/Vulkan command serialization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="890" y="222" width="230" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gfx_hwc" value="&lt;b&gt;HWComposer&lt;/b&gt;&lt;br&gt;goldfish DRM device" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="222" width="200" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gfx_vm" value="&lt;font color=&quot;#D32F2F&quot;&gt;── goldfish_pipe (QEMU virtio) ──&lt;/font&gt;" style="text;html=1;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="270" width="400" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gfx_host" value="&lt;b&gt;Host: gfxstream Renderer (same!)&lt;/b&gt;&lt;br&gt;QEMU host process → Host GPU HW acceleration&lt;br&gt;Shared codebase: hardware/google/gfxstream/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8A65;strokeColor=#BF360C;fontColor=#FFFFFF;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="870" y="292" width="350" height="45" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gfx_display" value="&lt;b&gt;Display: Qt Window&lt;/b&gt;&lt;br&gt;Android Studio Emulator GUI&lt;br&gt;Single display only (default)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF7043;strokeColor=#BF360C;fontColor=#FFFFFF;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="292" width="250" height="45" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gfx_auto" value="&lt;b&gt;Automotive Graphics Gaps:&lt;/b&gt;&lt;br&gt;⚠️ Single display (no cluster + IVI)&lt;br&gt;⚠️ Requires Android Studio GUI&lt;br&gt;❌ No headless multi-display mode&lt;br&gt;✅ Same GPU quality as Cuttlefish" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#D32F2F;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="870" y="345" width="350" height="58" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== BROADCAST RADIO SECTION ==================== -->
+        <mxCell id="radio_section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="445" width="760" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="radio_title" value="&lt;b&gt;📻 BROADCAST RADIO (AM/FM/DAB)&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#1B5E20;" vertex="1" parent="1">
+          <mxGeometry x="190" y="448" width="420" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- AIDL Interface -->
+        <mxCell id="radio_aidl" value="&lt;b&gt;IBroadcastRadio AIDL Interface&lt;/b&gt;&lt;br&gt;hw_interfaces/broadcastradio/aidl/&lt;br&gt;tune(), seek(), step(), cancel()&lt;br&gt;getProgramList(), setConfigFlag()&lt;br&gt;AM/FM bands, DAB ensembles, HD Radio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="35" y="480" width="340" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Radio Status -->
+        <mxCell id="cf_radio" value="&lt;b&gt;Cuttlefish Status:&lt;/b&gt;&lt;br&gt;⚠️ broadcastradio.xml DECLARED in&lt;br&gt;shared/auto/device_vendor.mk&lt;br&gt;❌ But NO IBroadcastRadio HAL implementation&lt;br&gt;❌ No default radio service in guest HALs&lt;br&gt;&lt;font color=&quot;#1565C0&quot;&gt;Stub only — needs Tier-1 implementation&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="35" y="570" width="340" height="85" as="geometry"/>
+        </mxCell>
+
+        <!-- Emu Radio Status -->
+        <mxCell id="emu_radio" value="&lt;b&gt;Emulator Status:&lt;/b&gt;&lt;br&gt;❌ No broadcastradio permission declared&lt;br&gt;❌ No IBroadcastRadio implementation&lt;br&gt;❌ goldfish/hals/radio/ is RIL (telephony)&lt;br&gt;&lt;font color=&quot;#D32F2F&quot;&gt;Zero broadcast radio support&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#D32F2F;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="400" y="480" width="360" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Radio Tier-1 Action -->
+        <mxCell id="radio_action" value="&lt;b&gt;🎯 Tier-1 Action: Implement BroadcastRadio HAL&lt;/b&gt;&lt;br&gt;1. Create default IBroadcastRadio service in Cuttlefish guest HALs&lt;br&gt;2. Implement FM frequency scanning simulator on host side&lt;br&gt;3. Add DAB ensemble emulation for EU markets&lt;br&gt;4. Route audio output to fm_tuner BUS source (already declared!)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="400" y="570" width="360" height="85" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== DIGITAL TV SECTION ==================== -->
+        <mxCell id="dtv_section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#4527A0;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="800" y="445" width="760" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="dtv_title" value="&lt;b&gt;📺 DIGITAL TV / TUNER&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#4527A0;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="448" width="280" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- ITuner AIDL -->
+        <mxCell id="dtv_aidl" value="&lt;b&gt;ITuner AIDL Interface&lt;/b&gt;&lt;br&gt;hw_interfaces/tv/tuner/aidl/&lt;br&gt;getFrontendIds(), openFrontendById()&lt;br&gt;openDemux(), getDemuxCaps()&lt;br&gt;openDescrambler(), getLnbIds()&lt;br&gt;Supports: DVB-T/S/C, ATSC, ISDB-T" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1C4E9;strokeColor=#4527A0;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="815" y="480" width="350" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Neither has it -->
+        <mxCell id="dtv_neither" value="&lt;b&gt;Implementation Status:&lt;/b&gt;&lt;br&gt;&lt;br&gt;❌ &lt;b&gt;Cuttlefish:&lt;/b&gt; No ITuner HAL implementation&lt;br&gt;    No TV tuner in crosvm virtual devices&lt;br&gt;&lt;br&gt;❌ &lt;b&gt;Emulator:&lt;/b&gt; No ITuner HAL implementation&lt;br&gt;    No QEMU tuner device model&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#D32F2F&quot;&gt;&lt;b&gt;Both platforms: 0/10 for DTV&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#D32F2F;fontSize=9;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1185" y="480" width="355" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- DTV Action -->
+        <mxCell id="dtv_action" value="&lt;b&gt;🎯 Tier-1 Action: Build Tuner HAL for Cuttlefish&lt;/b&gt;&lt;br&gt;1. Implement ITuner service with virtual frontend&lt;br&gt;2. Add DVB-T/ISDB-T frontend simulator&lt;br&gt;3. Create TS stream injection from host (file-based)&lt;br&gt;4. Essential for rear-seat entertainment &amp; live TV in vehicles" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#4527A0;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="815" y="580" width="720" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== OVERALL SCORES ==================== -->
+        <mxCell id="score_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#283593;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="20" y="730" width="1540" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="score_title" value="&lt;b&gt;Overall Scores — Graphics / Radio / DTV&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#283593;" vertex="1" parent="1">
+          <mxGeometry x="500" y="735" width="560" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gfx_score" value="&lt;b&gt;Graphics / GPU&lt;/b&gt;&lt;br&gt;CF: 8/10 | Emu: 7/10&lt;br&gt;Both use gfxstream; CF wins on multi-display + headless" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#880E4F;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="765" width="480" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="radio_score" value="&lt;b&gt;Broadcast Radio&lt;/b&gt;&lt;br&gt;CF: 2/10 | Emu: 0/10&lt;br&gt;CF has permission declared; both need HAL impl" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#1B5E20;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="540" y="765" width="480" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dtv_score" value="&lt;b&gt;Digital TV / Tuner&lt;/b&gt;&lt;br&gt;CF: 0/10 | Emu: 0/10&lt;br&gt;Neither has implementation; Tier-1 opportunity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1C4E9;strokeColor=#4527A0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="765" width="500" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="final_note" value="&lt;b&gt;Strategic Insight:&lt;/b&gt; Graphics is the most mature area across both platforms (shared gfxstream). Broadcast Radio and Digital TV represent significant Tier-1 contribution opportunities — implementing these HALs in Cuttlefish would demonstrate automotive domain expertise and could be upstreamed to AOSP." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;align=left;spacingLeft=10;spacingRight=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="825" width="1500" height="40" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="22.1.2">
+  <diagram id="connectivity" name="Connectivity Stack - Bluetooth, WiFi, GNSS, Sensors">
+    <mxGraphModel dx="1800" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;Connectivity &amp; Sensor Stack Comparison&lt;/b&gt;&lt;br&gt;Bluetooth · WiFi · GNSS · Sensors — Source Code Analysis for Automotive SDV" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="200" y="15" width="1200" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== BLUETOOTH SECTION ==================== -->
+        <mxCell id="bt_section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#4527A0;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="75" width="760" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="bt_title" value="&lt;b&gt;🔵 BLUETOOTH&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#4527A0;" vertex="1" parent="1">
+          <mxGeometry x="310" y="78" width="200" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Bluetooth -->
+        <mxCell id="cf_bt_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1C4E9;strokeColor=#4527A0;" vertex="1" parent="1">
+          <mxGeometry x="35" y="108" width="355" height="255" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_bt_title" value="&lt;b&gt;Cuttlefish: RootCanal Virtual BT&lt;/b&gt;" style="text;html=1;align=center;fontSize=11;fontColor=#4527A0;" vertex="1" parent="1">
+          <mxGeometry x="75" y="112" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_bt_guest" value="&lt;b&gt;Guest: BT HAL&lt;/b&gt;&lt;br&gt;cuttlefish/guest/hals/bluetooth/&lt;br&gt;Standard android.hardware.bluetooth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B39DDB;strokeColor=#4527A0;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="50" y="138" width="325" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_bt_hci" value="&lt;b&gt;HCI Transport: FIFO Pipes&lt;/b&gt;&lt;br&gt;bt_fifo_vm.in / bt_fifo_vm.out&lt;br&gt;→ TcpConnector → rootcanal_hci_port" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#7B1FA2;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="50" y="188" width="325" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_bt_rootcanal" value="&lt;b&gt;Host: RootCanal Controller&lt;/b&gt;&lt;br&gt;Full BT 5.x LE + Classic emulation&lt;br&gt;bluetooth_handler.h → WebRTC BT forwarding&lt;br&gt;Multi-device pairing simulation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#AB47BC;strokeColor=#4A148C;fontColor=#FFFFFF;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="50" y="238" width="325" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_bt_auto" value="&lt;b&gt;Automotive BT Profiles:&lt;/b&gt;&lt;br&gt;✅ HFP (Hands-Free) ✅ A2DP (Audio)&lt;br&gt;✅ AVRCP (Media Ctrl) ✅ PBAP (Phonebook)&lt;br&gt;✅ MAP (Messages) ✅ BLE (Key/Sensors)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="50" y="298" width="325" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Emu Bluetooth -->
+        <mxCell id="emu_bt_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="410" y="108" width="355" height="255" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_bt_title" value="&lt;b&gt;Emulator: Basic BT Emulation&lt;/b&gt;" style="text;html=1;align=center;fontSize=11;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="450" y="112" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_bt_impl" value="&lt;b&gt;netsim (Network Simulator)&lt;/b&gt;&lt;br&gt;Limited BT Classic + BLE&lt;br&gt;Primarily for mobile app testing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="425" y="138" width="325" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_bt_transport" value="&lt;b&gt;Transport: goldfish_pipe&lt;/b&gt;&lt;br&gt;BT commands over QEMU pipe&lt;br&gt;Limited bandwidth, higher latency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="425" y="188" width="325" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_bt_missing" value="&lt;b&gt;Automotive BT Gaps:&lt;/b&gt;&lt;br&gt;❌ No HFP audio path integration&lt;br&gt;❌ No multi-device BT simulation&lt;br&gt;❌ Limited profile support&lt;br&gt;❌ No BT key fob emulation (BLE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#D32F2F;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="425" y="248" width="325" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== WIFI SECTION ==================== -->
+        <mxCell id="wifi_section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#0D47A1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="800" y="75" width="760" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="wifi_title" value="&lt;b&gt;📶 WiFi&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="78" width="100" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- CF WiFi -->
+        <mxCell id="cf_wifi_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="815" y="108" width="355" height="255" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_wifi_title" value="&lt;b&gt;Cuttlefish: mac80211_hwsim&lt;/b&gt;" style="text;html=1;align=center;fontSize=11;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="855" y="112" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_wifi_stack" value="&lt;b&gt;Full WiFi Stack:&lt;/b&gt;&lt;br&gt;mac80211_hwsim kernel driver&lt;br&gt;→ wpa_supplicant / hostapd&lt;br&gt;→ Real 802.11 frame processing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#0D47A1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="830" y="138" width="325" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_wifi_openwrt" value="&lt;b&gt;Host: OpenWrt AP Router&lt;/b&gt;&lt;br&gt;Full WiFi AP in separate VM&lt;br&gt;DHCP, DNS, NAT, bridging&lt;br&gt;Realistic network topology" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#64B5F6;strokeColor=#0D47A1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="830" y="198" width="325" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_wifi_auto" value="&lt;b&gt;Automotive WiFi Use Cases:&lt;/b&gt;&lt;br&gt;✅ WiFi hotspot (passenger connectivity)&lt;br&gt;✅ OTA update channel testing&lt;br&gt;✅ V2X WiFi-Direct simulation (possible)&lt;br&gt;✅ WiFi Aware for proximity features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#0D47A1;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="830" y="258" width="325" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- Emu WiFi -->
+        <mxCell id="emu_wifi_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="108" width="355" height="255" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_wifi_title" value="&lt;b&gt;Emulator: SLIRP NAT&lt;/b&gt;" style="text;html=1;align=center;fontSize=11;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="112" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_wifi_impl" value="&lt;b&gt;Network Stack:&lt;/b&gt;&lt;br&gt;SLIRP user-mode networking&lt;br&gt;No real WiFi stack&lt;br&gt;Just TCP/IP pass-through" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="138" width="325" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_wifi_missing" value="&lt;b&gt;Automotive WiFi Gaps:&lt;/b&gt;&lt;br&gt;❌ No mac80211 — can't test WiFi APIs&lt;br&gt;❌ No AP mode (hotspot testing)&lt;br&gt;❌ No WiFi Direct for V2X&lt;br&gt;❌ No realistic network conditions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#D32F2F;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="208" width="325" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== GNSS SECTION ==================== -->
+        <mxCell id="gnss_section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="395" width="760" height="280" as="geometry"/>
+        </mxCell>
+        <mxCell id="gnss_title" value="&lt;b&gt;📍 GNSS / Location&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#1B5E20;" vertex="1" parent="1">
+          <mxGeometry x="310" y="398" width="200" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- CF GNSS -->
+        <mxCell id="cf_gnss_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#1B5E20;" vertex="1" parent="1">
+          <mxGeometry x="35" y="428" width="355" height="235" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_gnss_title" value="&lt;b&gt;Cuttlefish: GNSS HAL&lt;/b&gt;" style="text;html=1;align=center;fontSize=11;fontColor=#1B5E20;" vertex="1" parent="1">
+          <mxGeometry x="75" y="432" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gnss_impl" value="&lt;b&gt;IGnss AIDL Interface&lt;/b&gt;&lt;br&gt;hw_interfaces/gnss/aidl/&lt;br&gt;NMEA sentence injection from host&lt;br&gt;Configurable satellite constellation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#1B5E20;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="50" y="458" width="325" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gnss_transport" value="&lt;b&gt;Transport: vsock GNSS channel&lt;/b&gt;&lt;br&gt;Host injects location data via gRPC&lt;br&gt;Supports route playback, geofencing test" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#81C784;strokeColor=#1B5E20;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="50" y="518" width="325" height="45" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_gnss_auto" value="&lt;b&gt;Automotive GNSS:&lt;/b&gt;&lt;br&gt;✅ Route simulation for navigation testing&lt;br&gt;✅ Dead reckoning sensor fusion ready&lt;br&gt;✅ Multi-constellation (GPS+GLONASS+Galileo)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#1B5E20;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="50" y="573" width="325" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Emu GNSS -->
+        <mxCell id="emu_gnss_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="410" y="428" width="355" height="235" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_gnss_title" value="&lt;b&gt;Emulator: goldfish GNSS&lt;/b&gt;" style="text;html=1;align=center;fontSize=11;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="450" y="432" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gnss_impl" value="&lt;b&gt;goldfish/hals/gnss/&lt;/b&gt;&lt;br&gt;HIDL IGnss implementation&lt;br&gt;QEMU pipe GPS channel&lt;br&gt;Android Studio location injection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="425" y="458" width="325" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_gnss_features" value="&lt;b&gt;Features:&lt;/b&gt;&lt;br&gt;✅ Location injection via Android Studio&lt;br&gt;✅ GPX route playback&lt;br&gt;⚠️ Basic NMEA only&lt;br&gt;❌ No sensor fusion / dead reckoning" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="425" y="518" width="325" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== SENSORS SECTION ==================== -->
+        <mxCell id="sensor_section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="800" y="395" width="760" height="280" as="geometry"/>
+        </mxCell>
+        <mxCell id="sensor_title" value="&lt;b&gt;🔧 Sensors&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="398" width="100" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Sensors -->
+        <mxCell id="cf_sensor_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="815" y="428" width="355" height="235" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf_sensor_title" value="&lt;b&gt;Cuttlefish: Limited Sensors&lt;/b&gt;" style="text;html=1;align=center;fontSize=11;fontColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="855" y="432" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_sensor_impl" value="&lt;b&gt;No dedicated sensor HAL directory&lt;/b&gt;&lt;br&gt;Relies on crosvm virtio-input for basic sensors&lt;br&gt;Camera module has some sensor refs&lt;br&gt;Limited accelerometer/gyro emulation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCC80;strokeColor=#BF360C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="830" y="458" width="325" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf_sensor_gap" value="&lt;b&gt;Automotive Sensor Gaps:&lt;/b&gt;&lt;br&gt;⚠️ No vehicle-specific sensors (steering angle)&lt;br&gt;⚠️ No IMU data for dead reckoning&lt;br&gt;⚠️ No wheel speed / odometer sensors&lt;br&gt;❌ No sensor fusion HAL integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#D32F2F;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="830" y="523" width="325" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- Emu Sensors -->
+        <mxCell id="emu_sensor_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="428" width="355" height="235" as="geometry"/>
+        </mxCell>
+        <mxCell id="emu_sensor_title" value="&lt;b&gt;Emulator: MultihalSensors (QEMU)&lt;/b&gt;" style="text;html=1;align=center;fontSize=11;fontColor=#F57F17;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="432" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_sensor_impl" value="&lt;b&gt;goldfish/hals/sensors/multihal_sensors.h&lt;/b&gt;&lt;br&gt;ISensorsSubHal (HIDL 2.1)&lt;br&gt;QEMU pipe sensor protocol&lt;br&gt;Full sensor suite via host injection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="458" width="325" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_sensor_list" value="&lt;b&gt;Available Sensors:&lt;/b&gt;&lt;br&gt;✅ Accelerometer, Gyroscope, Magnetometer&lt;br&gt;✅ Light, Proximity, Temperature&lt;br&gt;✅ Humidity, Pressure, HingeAngle&lt;br&gt;✅ Heart Rate, Wrist Tilt (mobile focus)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="523" width="325" height="65" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="emu_sensor_note" value="&lt;b&gt;Note:&lt;/b&gt; Emulator has BETTER sensor suite than&lt;br&gt;Cuttlefish, but sensors are mobile-oriented&lt;br&gt;(no automotive-specific sensors)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="598" width="325" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== SUMMARY SCORES ==================== -->
+        <mxCell id="summary_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#283593;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="20" y="700" width="1540" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="summary_title" value="&lt;b&gt;🚗 Automotive Tier-1 Connectivity Assessment&lt;/b&gt;" style="text;html=1;align=center;fontSize=14;fontColor=#283593;" vertex="1" parent="1">
+          <mxGeometry x="500" y="705" width="560" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Score Cards -->
+        <mxCell id="bt_score" value="&lt;b&gt;Bluetooth&lt;/b&gt;&lt;br&gt;CF: 8/10 | Emu: 3/10&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;CF: Full BT stack with HFP&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1C4E9;strokeColor=#4527A0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="735" width="360" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="wifi_score" value="&lt;b&gt;WiFi&lt;/b&gt;&lt;br&gt;CF: 9/10 | Emu: 2/10&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;CF: Real WiFi stack + AP mode&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#0D47A1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="735" width="360" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gnss_score" value="&lt;b&gt;GNSS&lt;/b&gt;&lt;br&gt;CF: 7/10 | Emu: 6/10&lt;br&gt;&lt;font color=&quot;#FF8F00&quot;&gt;Both decent; CF better for headless CI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#1B5E20;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="735" width="360" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sensor_score" value="&lt;b&gt;Sensors&lt;/b&gt;&lt;br&gt;CF: 4/10 | Emu: 6/10&lt;br&gt;&lt;font color=&quot;#E65100&quot;&gt;Emu wins on sensor count, neither has auto sensors&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="735" width="360" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Key Takeaway -->
+        <mxCell id="takeaway" value="&lt;b&gt;Key Takeaway for Tier-1:&lt;/b&gt; Cuttlefish dominates in Bluetooth (RootCanal HFP) and WiFi (mac80211_hwsim) — critical for IVI and connectivity ECU development. Emulator has better basic sensor emulation but neither platform provides automotive-specific sensors (steering angle, wheel speed). &lt;b&gt;Recommendation:&lt;/b&gt; Use Cuttlefish for connectivity testing, supplement with custom VHAL properties for vehicle sensor data injection." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;align=left;spacingLeft=10;spacingRight=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="800" width="1500" height="50" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-02-17" agent="Claude" type="device">
+  <diagram name="Automotive HAL Functional Comparison" id="auto-hal">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="&lt;b&gt;Automotive HAL Functional Comparison — Real AOSP Source Code Analysis&lt;/b&gt;&lt;br&gt;&lt;i&gt;For Tier-1 SDV Development Assessment&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="350" y="5" width="900" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Column Headers -->
+        <mxCell id="h1" value="&lt;b&gt;Functional Area&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#424242;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="50" width="150" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="h2" value="&lt;b&gt;AIDL/HIDL Interface&lt;/b&gt;&lt;br&gt;(hardware/interfaces/)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#424242;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="170" y="50" width="190" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="h3" value="&lt;b&gt;Emulator (Goldfish)&lt;/b&gt;&lt;br&gt;device/generic/goldfish/" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1565C0;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="360" y="50" width="310" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="h4" value="&lt;b&gt;Cuttlefish&lt;/b&gt;&lt;br&gt;device/google/cuttlefish/" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="50" width="310" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="h5" value="&lt;b&gt;SDV Gap&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E65100;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="980" y="50" width="140" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="h6" value="&lt;b&gt;Tier-1 Action&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6A1B9A;fontColor=#FFFFFF;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="50" width="170" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 1: Audio -->
+        <mxCell id="r1c1" value="&lt;b&gt;🔊 Audio&lt;/b&gt;&lt;br&gt;Speaker / Mic&lt;br&gt;Multi-zone" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;fontStyle=0;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="85" width="150" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="r1c2" value="audio HIDL 7.0 → AIDL&lt;br&gt;IModule, IStreamOut&lt;br&gt;IStreamIn, IEffect&lt;br&gt;AudioControl (auto)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="85" width="190" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="r1c3" value="✅ HIDL 7.0 IPrimaryDevice&lt;br&gt;primary_device.h, talsa.cpp&lt;br&gt;TinyALSA → goldfish_audio&lt;br&gt;&lt;font color=&quot;#C62828&quot;&gt;❌ Single-zone only, no BUS routing&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="85" width="310" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="r1c4" value="✅ HIDL 7.0 + effects manifest&lt;br&gt;&lt;b&gt;✅ 6 BUS outputs&lt;/b&gt; (Media/Nav/Notif/&lt;br&gt;Phone/Assist/System) + fm_tuner +&lt;br&gt;telephony + HFP routing" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="85" width="310" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="r1c5" value="&lt;font color=&quot;#2E7D32&quot;&gt;CF: Full auto&lt;br&gt;audio routing&lt;/font&gt;&lt;br&gt;Emu: None" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="85" width="140" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="r1c6" value="Use CF for multi-zone.&lt;br&gt;Extend with custom&lt;br&gt;amplifier HAL and&lt;br&gt;DSP effects chain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="85" width="170" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 2: Bluetooth -->
+        <mxCell id="r2c1" value="&lt;b&gt;📶 Bluetooth&lt;/b&gt;&lt;br&gt;BT Classic + BLE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="155" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r2c2" value="bluetooth AIDL&lt;br&gt;IBluetoothHci&lt;br&gt;+ Fluoride/Gabeldorsche" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="155" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r2c3" value="&lt;font color=&quot;#C62828&quot;&gt;❌ No Bluetooth HAL&lt;br&gt;No RootCanal&lt;br&gt;No HCI transport&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="155" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r2c4" value="✅ RootCanal virtual BT controller&lt;br&gt;BluetoothHandler (WebRTC bridge)&lt;br&gt;HCI over FIFO (bt_fifo_vm.in/out)&lt;br&gt;&lt;b&gt;✅ Full BT stack&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="155" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r2c5" value="&lt;font color=&quot;#2E7D32&quot;&gt;CF: Full BT&lt;/font&gt;&lt;br&gt;Emu: None" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="155" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r2c6" value="Use CF. Add BLE&lt;br&gt;profiles for car key,&lt;br&gt;phone projection" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="155" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 3: Vehicle HAL -->
+        <mxCell id="r3c1" value="&lt;b&gt;🚗 Vehicle HAL&lt;/b&gt;&lt;br&gt;VHAL Properties" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="215" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r3c2" value="automotive.vehicle&lt;br&gt;AIDL v3 IVehicle&lt;br&gt;VehicleProperty enum&lt;br&gt;(VIN, speed, gear...)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="215" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r3c3" value="&lt;font color=&quot;#C62828&quot;&gt;❌ No Vehicle HAL&lt;br&gt;No IVehicle implementation&lt;br&gt;No vehicle property simulation&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="215" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r3c4" value="&lt;b&gt;✅ AIDL v3 IVehicle/default&lt;/b&gt;&lt;br&gt;GRPCVehicleHardware → host server&lt;br&gt;DefaultVehicleHal (VehicleService.cpp)&lt;br&gt;vsock + Ethernet dual transport" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="215" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r3c5" value="&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;CF: Full VHAL&lt;/b&gt;&lt;/font&gt;&lt;br&gt;Emu: None" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#A5D6A7;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="215" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r3c6" value="&lt;b&gt;Use CF.&lt;/b&gt; Extend host&lt;br&gt;VHAL server with&lt;br&gt;OEM vehicle props,&lt;br&gt;CAN→VHAL bridge" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E1BEE7;fontSize=9;align=left;spacingLeft=5;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="215" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 4: WiFi -->
+        <mxCell id="r4c1" value="&lt;b&gt;📡 WiFi&lt;/b&gt;&lt;br&gt;STA / AP / P2P" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="275" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r4c2" value="wifi AIDL&lt;br&gt;IWifi, IWifiChip&lt;br&gt;IWifiStaIface&lt;br&gt;IWifiApIface" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="275" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r4c3" value="&lt;font color=&quot;#C62828&quot;&gt;❌ No real WiFi stack&lt;br&gt;Ethernet only (virtio-net + SLIRP)&lt;br&gt;WiFi HAL stub only&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="275" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r4c4" value="&lt;b&gt;✅ Full WiFi stack&lt;/b&gt;&lt;br&gt;mac80211_hwsim kernel module&lt;br&gt;OpenWrt VM (hostapd AP)&lt;br&gt;WPA2/WPA3 + WiFi Direct testing" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="275" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r4c5" value="&lt;font color=&quot;#2E7D32&quot;&gt;CF: Full WiFi&lt;/font&gt;&lt;br&gt;Emu: Stub" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="275" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r4c6" value="Use CF for V2X&lt;br&gt;connectivity testing.&lt;br&gt;Add 802.11p/DSRC&lt;br&gt;simulation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="275" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 5: GNSS -->
+        <mxCell id="r5c1" value="&lt;b&gt;🛰️ GNSS&lt;/b&gt;&lt;br&gt;GPS / GLONASS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="335" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r5c2" value="gnss AIDL&lt;br&gt;IGnss, IGnssCallback&lt;br&gt;IGnssMeasurement&lt;br&gt;IGnssNavigationMsg" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="335" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r5c3" value="✅ goldfish/hals/gnss/&lt;br&gt;gps_qemu.c (NMEA parser)&lt;br&gt;Qt map UI + GPX/KML playback&lt;br&gt;Telnet: geo fix lat lng" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="335" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r5c4" value="✅ gnss_grpc_proxy (host daemon)&lt;br&gt;AIDL GNSS HAL (guest/hals/)&lt;br&gt;Location inject via gRPC over vsock&lt;br&gt;Programmatic only (no map UI)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="335" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r5c5" value="Both: ✅&lt;br&gt;Emu: Better&lt;br&gt;interactive UX" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="335" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r5c6" value="CF for CI testing.&lt;br&gt;Add route replay&lt;br&gt;for nav validation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="335" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 6: Sensors -->
+        <mxCell id="r6c1" value="&lt;b&gt;📊 Sensors&lt;/b&gt;&lt;br&gt;IMU / Accel / Gyro" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="395" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r6c2" value="sensors AIDL&lt;br&gt;ISensors, ISensorsCallback&lt;br&gt;Multi-HAL framework" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="395" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r6c3" value="✅ HIDL 2.1 MultihalSensors&lt;br&gt;ISensorsSubHal (multihal_sensors.h)&lt;br&gt;QEMU pipe transport&lt;br&gt;&lt;b&gt;✅ Interactive 3D model in Qt&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="395" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r6c4" value="⚠️ Minimal implementation&lt;br&gt;Auto config: only accelerometer + gyro&lt;br&gt;(android.hardware.sensor.*.xml)&lt;br&gt;Programmatic inject via vsock only" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="395" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r6c5" value="Emu: Better&lt;br&gt;interactive.&lt;br&gt;CF: CI-ready" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="395" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r6c6" value="Extend CF with&lt;br&gt;automotive sensors:&lt;br&gt;wheel speed, steering&lt;br&gt;angle, gear position" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="395" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 7: Radio/Tuner -->
+        <mxCell id="r7c1" value="&lt;b&gt;📻 Broadcast&lt;/b&gt;&lt;br&gt;&lt;b&gt;Radio / Tuner&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="455" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r7c2" value="broadcastradio AIDL&lt;br&gt;IBroadcastRadio&lt;br&gt;ITunerCallback&lt;br&gt;AM/FM/DAB/HD Radio" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="455" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r7c3" value="&lt;font color=&quot;#C62828&quot;&gt;❌ No BroadcastRadio HAL&lt;br&gt;hals/radio/ is basic RIL radio only&lt;br&gt;No FM tuner, no DAB&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="455" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r7c4" value="⚠️ broadcastradio.xml permission declared&lt;br&gt;fm_tuner audio input configured&lt;br&gt;Auto audio policy has radio_input mixPort&lt;br&gt;&lt;font color=&quot;#E65100&quot;&gt;No IBroadcastRadio impl yet&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="455" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r7c5" value="&lt;font color=&quot;#E65100&quot;&gt;Gap: Need&lt;br&gt;IBroadcastRadio&lt;br&gt;implementation&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="455" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r7c6" value="&lt;b&gt;Implement&lt;/b&gt; virtual&lt;br&gt;IBroadcastRadio on&lt;br&gt;CF host. Simulate&lt;br&gt;AM/FM/DAB stations" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E1BEE7;fontSize=9;align=left;spacingLeft=5;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="455" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 8: Digital TV -->
+        <mxCell id="r8c1" value="&lt;b&gt;📺 Digital TV&lt;/b&gt;&lt;br&gt;DVB / ATSC / ISDB" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="515" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r8c2" value="tv.tuner AIDL&lt;br&gt;ITuner, IFrontend&lt;br&gt;IDemux, IDescrambler&lt;br&gt;ILnb (satellite)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="515" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r8c3" value="&lt;font color=&quot;#C62828&quot;&gt;❌ No TV Tuner HAL&lt;br&gt;No DVB/ATSC frontend&lt;br&gt;No Demux/Descrambler&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="515" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r8c4" value="&lt;font color=&quot;#C62828&quot;&gt;❌ No TV Tuner HAL implementation&lt;br&gt;ITuner AIDL defined in hw_interfaces/&lt;br&gt;but no Cuttlefish-side impl&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="515" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r8c5" value="&lt;font color=&quot;#C62828&quot;&gt;Gap: Neither&lt;br&gt;has DTV&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFCDD2;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="515" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r8c6" value="&lt;b&gt;Build&lt;/b&gt; virtual ITuner&lt;br&gt;with DVB-T2 frontend&lt;br&gt;on CF host. Use TS&lt;br&gt;file injection" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E1BEE7;fontSize=9;align=left;spacingLeft=5;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="515" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 9: Graphics -->
+        <mxCell id="r9c1" value="&lt;b&gt;🖥️ Graphics&lt;/b&gt;&lt;br&gt;GPU / Display" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="575" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r9c2" value="graphics.composer AIDL&lt;br&gt;IComposer, IComposerClient&lt;br&gt;gralloc, EGL, Vulkan" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="575" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r9c3" value="✅ gfxstream via goldfish_pipe&lt;br&gt;hwcomposer.ranchu (HWC2)&lt;br&gt;Host GPU rendering (GL+VK)&lt;br&gt;Single display (+ multi-display)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="575" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r9c4" value="✅ gfxstream/virgl/venus via virtio-gpu&lt;br&gt;guest/hals/hwcomposer/ (DRM-based)&lt;br&gt;Multi-display for auto (cluster+IVI)&lt;br&gt;WebRTC streaming to browser" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="575" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r9c5" value="Both: ✅&lt;br&gt;CF: Better&lt;br&gt;multi-display" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="575" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r9c6" value="CF for cluster +&lt;br&gt;IVI dual display.&lt;br&gt;Add HUD rendering&lt;br&gt;pipeline" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="575" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 10: CAN Bus -->
+        <mxCell id="r10c1" value="&lt;b&gt;🔌 CAN Bus&lt;/b&gt;&lt;br&gt;Vehicle network" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="635" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r10c2" value="automotive.can AIDL&lt;br&gt;ICanController&lt;br&gt;upBus/downBus&lt;br&gt;VirtualInterface type" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="635" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r10c3" value="&lt;font color=&quot;#C62828&quot;&gt;❌ No CAN bus support&lt;br&gt;No vCAN / SocketCAN&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="635" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r10c4" value="⚠️ ICanController AIDL has VirtualInterface&lt;br&gt;Linux vCAN (virtual CAN) is usable in guest&lt;br&gt;&lt;font color=&quot;#E65100&quot;&gt;No crosvm virtio-can device yet&lt;br&gt;Needs manual vCAN setup in guest&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="635" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r10c5" value="&lt;font color=&quot;#E65100&quot;&gt;&lt;b&gt;Key Gap&lt;/b&gt;&lt;br&gt;Need virtio-can&lt;br&gt;in crosvm&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="635" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r10c6" value="&lt;b&gt;Priority:&lt;/b&gt; Build&lt;br&gt;virtio-can device&lt;br&gt;in crosvm → vCAN&lt;br&gt;→ SocketCAN in guest" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#CE93D8;fontSize=9;align=left;spacingLeft=5;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="635" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 11: EVS -->
+        <mxCell id="r11c1" value="&lt;b&gt;📷 EVS&lt;/b&gt;&lt;br&gt;Surround View" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="695" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r11c2" value="automotive.evs AIDL&lt;br&gt;IEvsCamera&lt;br&gt;IEvsDisplay&lt;br&gt;IEvsEnumerator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="170" y="695" width="190" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r11c3" value="&lt;font color=&quot;#C62828&quot;&gt;❌ No EVS HAL&lt;br&gt;No surround view camera&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="695" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r11c4" value="⚠️ EVS AIDL defined in hw_interfaces/&lt;br&gt;Camera HAL provides frame pipeline&lt;br&gt;&lt;font color=&quot;#E65100&quot;&gt;No EVS impl in Cuttlefish yet&lt;br&gt;Extensible via vsock camera+EVS bridge&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="695" width="310" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r11c5" value="&lt;font color=&quot;#E65100&quot;&gt;Gap: Need&lt;br&gt;EVS on CF&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="980" y="695" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="r11c6" value="Build virtual EVS&lt;br&gt;using CF camera +&lt;br&gt;3D scene rendering&lt;br&gt;on host" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;fontSize=9;align=left;spacingLeft=5;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="695" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Score Summary -->
+        <mxCell id="score_title" value="&lt;b&gt;Automotive Readiness Score&lt;/b&gt;" style="text;html=1;align=center;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="770" width="400" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="score_emu" value="&lt;b&gt;Emulator: 2/10&lt;/b&gt;&lt;br&gt;Only GNSS + Sensors (interactive)&lt;br&gt;Missing all automotive-critical HALs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="800" width="280" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="score_cf" value="&lt;b&gt;Cuttlefish: 7/10&lt;/b&gt;&lt;br&gt;VHAL + Audio zones + BT + WiFi + GNSS&lt;br&gt;Gaps: CAN bus, EVS, BroadcastRadio, DTV" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="530" y="800" width="280" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="score_action" value="&lt;b&gt;Tier-1 Opportunity: Extend Cuttlefish&lt;/b&gt;&lt;br&gt;Build: virtio-can + virtual EVS + BroadcastRadio&lt;br&gt;+ DTV Tuner on CF host platform" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="860" y="800" width="310" height="55" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
